@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fantasy Match Battle</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="screen">
+    <header class="top-bar glass">
+      <div class="turn">ターン <strong id="turnNow">05</strong>/<span id="turnMax">10</span></div>
+      <div class="goal">ターン内に敵を倒そう！</div>
+      <div class="combo">COMBO <span id="comboCount">00</span></div>
+    </header>
+
+    <section class="battle-area">
+      <aside class="hero-panel glass">
+        <img id="heroArt" alt="hero" />
+        <div class="status">
+          <h2>エミリー</h2>
+          <div class="hp"><span>HP</span><progress id="heroHp" max="28760" value="28760"></progress><b id="heroHpText">28,760 / 28,760</b></div>
+          <div class="skill"><span>スキルゲージ</span><progress id="skillGauge" max="100" value="85"></progress><b id="skillText">85%</b></div>
+        </div>
+      </aside>
+
+      <div class="board-wrap glass">
+        <div id="board" class="board"></div>
+        <p class="hint">ドラッグで隣接ピースを入れ替え</p>
+      </div>
+
+      <aside class="enemy-panel glass">
+        <img id="enemyArt" alt="enemy" />
+        <h2>ダークウィッチ・セレナ</h2>
+        <div class="hp"><span>HP</span><progress id="enemyHp" max="350000" value="215432"></progress><b id="enemyHpText">215,432 / 350,000</b></div>
+        <div class="damage-box">CRITICAL! <strong id="damage">24,560</strong></div>
+        <div class="bonus">コンボボーナス <strong id="bonus">x1.60</strong></div>
+      </aside>
+    </section>
+
+    <footer class="actions">
+      <button id="regen">回復</button>
+      <button id="burst">ライトバースト</button>
+      <button id="wind">ウィンドエッジ</button>
+      <button id="guard">プロテクション</button>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
