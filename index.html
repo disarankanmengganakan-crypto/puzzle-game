@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ねこスライドパズル</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="hud">
+      <div class="title-wrap">
+        <img src="assets/cat-hero.svg" alt="キャラクター" class="avatar" />
+        <div>
+          <h1>ねこスライドパズル</h1>
+          <p>Image-gen で作った世界観アセットを使った 4x4 パズル</p>
+        </div>
+      </div>
+      <div class="stats">
+        <span>手数: <strong id="moves">0</strong></span>
+        <span>時間: <strong id="timer">00:00</strong></span>
+      </div>
+      <div class="controls">
+        <button id="shuffleBtn">シャッフル</button>
+        <button id="hintBtn">ヒント</button>
+      </div>
+    </header>
+
+    <section class="game-board-wrap">
+      <div id="board" class="board" aria-label="スライドパズル盤面"></div>
+      <div id="hint" class="hint">空きマスの上下左右のタイルを動かせます。</div>
+    </section>
+
+    <aside class="panel">
+      <h2>遊び方</h2>
+      <ol>
+        <li>タイルをクリックして空きマスへ移動させます。</li>
+        <li>正しい順番（1〜15）に並べるとクリアです。</li>
+        <li>最短手数に挑戦しましょう！</li>
+      </ol>
+      <img src="assets/puzzle-bg.svg" alt="背景アート" class="panel-art" />
+    </aside>
+  </main>
+
+  <dialog id="winDialog">
+    <h3>クリア！</h3>
+    <p id="resultText"></p>
+    <button id="closeDialog">もう一回遊ぶ</button>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
