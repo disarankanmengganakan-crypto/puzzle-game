@@ -5,24 +5,28 @@ export type CardData = {
   damage?: number;
   block?: number;
   applyVulnerable?: number;
+  draw?: number;
+  heal?: number;
+  category: "攻撃" | "防御" | "補助" | "魔法";
   color: string;
+  description: string;
 };
 
 const STARTER_DECK: CardData[] = [
-  { id: "s1", name: "Strike", cost: 1, damage: 6, color: "#4f83cc" },
-  { id: "s2", name: "Strike", cost: 1, damage: 6, color: "#4f83cc" },
-  { id: "s3", name: "Strike", cost: 1, damage: 6, color: "#4f83cc" },
-  { id: "d1", name: "Defend", cost: 1, block: 5, color: "#2f9e44" },
-  { id: "d2", name: "Defend", cost: 1, block: 5, color: "#2f9e44" },
-  { id: "b1", name: "Bash", cost: 2, damage: 8, applyVulnerable: 1, color: "#d9480f" },
+  { id: "s1", name: "きらめく斬撃", cost: 1, damage: 6, color: "#ff7aa2", category: "攻撃", description: "敵単体に6ダメージ" },
+  { id: "s2", name: "きらめく斬撃", cost: 1, damage: 6, color: "#ff7aa2", category: "攻撃", description: "敵単体に6ダメージ" },
+  { id: "s3", name: "きらめく斬撃", cost: 1, damage: 6, color: "#ff7aa2", category: "攻撃", description: "敵単体に6ダメージ" },
+  { id: "d1", name: "瞬きの守り", cost: 1, block: 5, color: "#72b7ff", category: "防御", description: "ブロックを5得る" },
+  { id: "d2", name: "瞬きの守り", cost: 1, block: 5, color: "#72b7ff", category: "防御", description: "ブロックを5得る" },
+  { id: "b1", name: "流星の破砕", cost: 2, damage: 8, applyVulnerable: 1, color: "#c084fc", category: "魔法", description: "8ダメージ。脆弱1を付与" },
 ];
 
 export const REWARD_POOL: CardData[] = [
-  { id: "r1", name: "Heavy Blade", cost: 2, damage: 14, color: "#5f3dc4" },
-  { id: "r2", name: "Guard Up", cost: 1, block: 8, color: "#2b8a3e" },
-  { id: "r3", name: "Jab", cost: 0, damage: 4, color: "#1c7ed6" },
-  { id: "r4", name: "Skull Bash", cost: 2, damage: 10, applyVulnerable: 2, color: "#e8590c" },
-  { id: "r5", name: "Shield Slam", cost: 1, damage: 7, block: 4, color: "#0c8599" },
+  { id: "r1", name: "スターライトカスケード", cost: 2, damage: 12, color: "#c084fc", category: "魔法", description: "敵全体に12ダメージ" },
+  { id: "r2", name: "やさしい花風", cost: 1, heal: 8, color: "#86efac", category: "補助", description: "HPを8回復" },
+  { id: "r3", name: "幸運のひらめき", cost: 1, draw: 2, color: "#67e8f9", category: "補助", description: "カードを2枚引く" },
+  { id: "r4", name: "上昇する意志", cost: 1, draw: 1, block: 3, color: "#fbbf24", category: "補助", description: "1枚引き、ブロック3" },
+  { id: "r5", name: "きらめく盾", cost: 1, block: 10, color: "#60a5fa", category: "防御", description: "ブロックを10得る" },
 ];
 
 class RunState {
