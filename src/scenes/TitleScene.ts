@@ -46,16 +46,12 @@ export class TitleScene extends Phaser.Scene {
       .setOrigin(0.5)
       .setInteractive({ useHandCursor: true });
 
+    let started = false;
     const startGame = (): void => {
-      this.cameras.main.flash(300, 255, 255, 255);
-      this.time.delayedCall(320, () => {
-        this.add
-          .text(width / 2, height * 0.85, "Next: map & battle scene setup", {
-            fontSize: "24px",
-            color: "#8ff0a4",
-          })
-          .setOrigin(0.5);
-      });
+      if (started) return;
+      started = true;
+      this.cameras.main.flash(280, 255, 255, 255);
+      this.time.delayedCall(300, () => this.scene.start("map"));
     };
 
     startLabel.on("pointerup", startGame);
