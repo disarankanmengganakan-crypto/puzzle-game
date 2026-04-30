@@ -3,59 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ダーククイーン・パズルバトル</title>
+  <title>モンスター娘ローグライク - 深淵の迷宮</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="game-screen">
-    <section class="battle-top">
-      <aside class="turn-panel frame-gold">
-        <p class="panel-label">残りターン</p>
-        <p id="turns" class="turn-value">12</p>
-        <p class="panel-sub">30ターン以内に<br><span>魔王を倒そう！</span></p>
-      </aside>
-
-      <div class="boss-area">
-        <div class="boss-hp-row frame-gold">
-          <span class="boss-name">魔王ヴァルドス</span>
-          <div class="hp-track"><div id="bossHpFill" class="hp-fill"></div></div>
-          <span id="bossHpText" class="hp-text">1,256,780 / 2,500,000</span>
-          <span class="boss-tag">BOSS</span>
+  <main class="layout">
+    <section class="left-panel frame">
+      <h1>モンスター娘ローグライク</h1>
+      <p class="subtitle">深淵の迷宮 1F - 30F</p>
+      <div class="party" id="partyList"></div>
+      <div class="skills">
+        <h2>スキル</h2>
+        <div class="skill-grid">
+          <button id="skillFlame">ブレイズ</button>
+          <button id="skillGuard">ガード</button>
+          <button id="skillScan">索敵</button>
         </div>
-        <div class="boss-portrait" aria-hidden="true"></div>
-        <div id="damageBurst" class="damage-burst">超強力!<br><strong>125,680</strong></div>
-        <div id="comboLabel" class="combo-label">6 COMBO!<br><span>攻撃力 +125%</span></div>
+      </div>
+      <div class="controls">
+        <p>操作: 移動 WASD / 矢印, 待機 [Space]</p>
       </div>
     </section>
 
-    <section class="board-wrap frame-gold">
-      <div id="board" class="board" aria-label="7x6 パズル盤面"></div>
-      <div class="move-tip">1マスだけ動かせるよ！</div>
+    <section class="dungeon frame">
+      <div class="floor-title" id="floorTitle">地下 1階</div>
+      <div id="grid" class="grid" aria-label="ダンジョンマップ"></div>
+      <p id="log" class="log">ようこそ、深淵の迷宮へ。</p>
     </section>
 
-    <section class="player-panel">
-      <div class="hero-card">
-        <div class="hero-art"></div>
-        <div class="hero-hp frame-gold">
-          <p>ルミナ</p>
-          <div class="hero-track"><div id="heroHpFill"></div></div>
-          <span>18,357 / 18,357</span>
-        </div>
+    <section class="right-panel frame">
+      <div class="hud">
+        <div><span>ターン</span><strong id="turn">1</strong></div>
+        <div><span>探索率</span><strong id="explore">0%</strong></div>
+        <div><span>危険度</span><strong id="danger">E</strong></div>
+        <div><span>GOLD</span><strong id="gold">0</strong></div>
       </div>
-
-      <div class="skill-row">
-        <button class="skill pink">回復</button>
-        <button class="skill red">全体攻撃</button>
-        <button class="skill yellow">光の裁き</button>
-        <button class="skill blue">防御バフ</button>
-        <button class="skill purple">闇の一撃</button>
-      </div>
-
-      <div class="menu-row">
-        <button id="shuffleBtn">メニュー</button>
-        <button id="autoBtn">オート OFF</button>
-        <button id="speedBtn">×2 スピード</button>
-      </div>
+      <div class="minimap" id="minimap"></div>
+      <div class="status" id="playerStatus"></div>
+      <button id="endTurn" class="end-turn">ターン終了</button>
     </section>
   </main>
 
