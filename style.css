@@ -1,12 +1,57 @@
-:root { --bg: #0f0d1a; --panel: #171328; --text: #f8efff; }
-body { margin: 0; font-family: "Yu Gothic", sans-serif; background: radial-gradient(circle at top, #20143a, var(--bg)); color: var(--text); }
-.app { display: grid; grid-template-columns: 280px 1fr 280px; gap: 14px; padding: 14px; }
-.panel { background: linear-gradient(180deg, #23183a, var(--panel)); border: 2px solid #7d59c2; border-radius: 12px; padding: 12px; }
-.center { display: grid; gap: 8px; }
-canvas { border: 2px solid #6a4ca5; border-radius: 12px; background: #10131f; width: 100%; height: auto; }
-#portrait { margin-top: 8px; background: radial-gradient(circle at 50% 20%, #31235b, #140f24); }
-.log { min-height: 70px; background: #120f1f; border: 1px solid #4e3e71; border-radius: 8px; padding: 8px; font-size: 14px; }
-.floor { font-size: 30px; font-weight: 700; margin-bottom: 8px; color: #ffc7ff; }
-.stats .row { display: flex; justify-content: space-between; margin: 4px 0; }
-ul { padding-left: 1.2rem; margin: .4rem 0; }
-@media (max-width: 1200px) { .app { grid-template-columns: 1fr; } }
+:root {
+  --bg: #060714;
+  --panel: rgba(10, 14, 33, 0.8);
+  --line: #4556a6;
+  --text: #eaf0ff;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Yu Gothic", system-ui, sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top, #1a245f, var(--bg));
+  min-height: 100vh;
+}
+
+#scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.hud {
+  position: relative;
+  z-index: 2;
+  width: min(440px, 95vw);
+  margin: 12px;
+  padding: 14px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+}
+
+h1 { margin: 0; font-size: 1.7rem; }
+.subtitle { margin: 4px 0 12px; opacity: .85; font-size: .9rem; }
+.status { line-height: 1.65; margin-bottom: 10px; }
+.controls { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+button {
+  border: 1px solid #6f81da;
+  background: linear-gradient(180deg, #2b3c9f, #1f2c77);
+  color: #f7f9ff;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:hover { filter: brightness(1.1); }
+.hint { margin: 0 0 10px; font-size: .85rem; opacity: .9; }
+.log {
+  min-height: 44px;
+  border: 1px solid #34457b;
+  border-radius: 8px;
+  padding: 8px;
+  background: rgba(8, 11, 25, 0.65);
+  font-size: .92rem;
+}

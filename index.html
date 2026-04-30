@@ -3,30 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>モンスター娘ローグライク（1F-30F）</title>
+  <title>Arcana Clash - 3Dカードバトル</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="app">
-    <aside class="panel left">
-      <h1>モンスター娘ローグライク</h1>
-      <div class="stats" id="partyStats"></div>
-      <div class="help"><h3>操作</h3><p>移動: 矢印 / WASD</p><p>待機: Space</p></div>
-    </aside>
+  <div class="hud">
+    <h1>Arcana Clash</h1>
+    <p class="subtitle">Three.js ブラウザカードゲーム（生成画像のみ使用）</p>
 
-    <main class="center">
-      <canvas id="game" width="800" height="640"></canvas>
-      <div class="log" id="log"></div>
-    </main>
-
-    <aside class="panel right">
-      <div id="floorLabel" class="floor">地下 1 階</div>
-      <div class="meta" id="meta"></div>
-      <canvas id="portrait" width="240" height="280"></canvas>
-      <h3>モンスター娘図鑑</h3>
-      <ul id="dex"></ul>
-    </aside>
+    <div class="status" id="status"></div>
+    <div class="controls">
+      <button id="drawBtn">カードを引く</button>
+      <button id="endTurnBtn">ターン終了</button>
+      <button id="resetBtn">リスタート</button>
+    </div>
+    <p class="hint">手札をクリックでプレイ。敵HPを0にすれば勝利です。</p>
+    <div id="log" class="log"></div>
   </div>
-  <script src="game.js"></script>
+
+  <div id="scene"></div>
+
+  <script type="module" src="game.js"></script>
 </body>
 </html>
