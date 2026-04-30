@@ -1,0 +1,26 @@
+:root {
+  --bg: #0f0d1a;
+  --panel: #171328;
+  --accent: #d44ee8;
+  --text: #f8efff;
+}
+body {
+  margin: 0;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  background: radial-gradient(circle at top, #20143a, var(--bg));
+  color: var(--text);
+}
+.app { display: grid; grid-template-columns: 280px 1fr 280px; gap: 14px; padding: 14px; }
+.panel {
+  background: linear-gradient(180deg, #23183a, var(--panel));
+  border: 2px solid #7d59c2;
+  border-radius: 12px;
+  padding: 12px;
+}
+.center { display: grid; gap: 8px; }
+canvas { border: 2px solid #6a4ca5; border-radius: 12px; background: #10131f; width: 100%; height: auto; }
+.log { min-height: 70px; background: #120f1f; border: 1px solid #4e3e71; border-radius: 8px; padding: 8px; font-size: 14px; }
+.floor { font-size: 30px; font-weight: 700; margin-bottom: 8px; color: #ffc7ff; }
+.stats .row { display: flex; justify-content: space-between; margin: 4px 0; }
+ul { padding-left: 1.2rem; margin: .4rem 0; }
+@media (max-width: 1200px) { .app { grid-template-columns: 1fr; } }
