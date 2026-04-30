@@ -29,11 +29,30 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 npm -v
 ```
 
+## `ENOENT package.json` が出る場合（今回の画面の状態）
+`npm.cmd` 自体は動いています。エラーの原因は**今いるフォルダに `package.json` が無い**ことです。
+
+例: `C:\Users\PC_User\Desktop` で実行すると、`C:\Users\PC_User\Desktop\package.json` を探して失敗します。
+
+先にプロジェクトフォルダへ移動してください。
+
+```powershell
+cd "<あなたがこのプロジェクトを置いたフォルダ>"
+dir package.json
+```
+
+`package.json` が表示されたら、そこで実行:
+
+```powershell
+npm.cmd install
+npm.cmd run dev
+```
+
 ## もし会社PCなどでポリシー変更できない場合
 - そのまま `npm.cmd` を使って開発を進められます。
 - もしくはコマンドプロンプト（cmd.exe）で `npm` を実行してください。
 
-## このプロジェクトの起動
+## このプロジェクトの起動（再確認）
 
 ```powershell
 cd <このリポジトリのパス>
