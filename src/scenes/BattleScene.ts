@@ -1,23 +1,8 @@
 import Phaser from "phaser";
+import { type CardData, REWARD_POOL, runState } from "../game/runState";
 
-export class BattleScene extends Phaser.Scene {
-  private playerHp = 40;
-  private enemyHp = 32;
-
-  constructor() {
-    super("battle");
-  }
-
-  create(data: { nodeId?: string }): void {
-    const { width, height } = this.scale;
-    this.add.rectangle(width / 2, height / 2, width, height, 0x1a1326);
-
-    this.add.text(36, 24, `Battle Prototype (${data.nodeId ?? "unknown"})`, {
-      fontSize: "36px",
-      color: "#ffd166",
-      fontStyle: "bold",
-    });
-
+type Card = CardData;
+  private rewardPhase = false;
     const playerHpText = this.add.text(100, 140, `Player HP: ${this.playerHp}`, { fontSize: "28px", color: "#e7f5ff" });
     const enemyHpText = this.add.text(width - 320, 140, `Enemy HP: ${this.enemyHp}`, { fontSize: "28px", color: "#ffe3e3" });
 
@@ -59,20 +44,60 @@ export class BattleScene extends Phaser.Scene {
     const g = this.add.graphics();
     g.fillStyle(color, 1);
     g.fillRoundedRect(x - 70, y - 110, 140, 190, 24);
-    g.fillStyle(0xffffff, 0.9);
-    g.fillCircle(x, y - 130, 44);
+    this.rewardPhase = false;
+    this.drawPile = this.shuffle([...runState.deck]);
+    if (this.enemyHp <= 0 || this.playerHp <= 0 || this.rewardPhase) return;
 
-    this.add.text(x, y + 98, label, { fontSize: "24px", color: "#ffffff" }).setOrigin(0.5);
+    if (!card || this.enemyHp <= 0 || this.playerHp <= 0 || this.rewardPhase) return;
+      this.enemyHp = 0;
+      this.openRewardSelection();
+
+  private openRewardSelection(): void {
+    this.rewardPhase = true;
+    this.messageText.setText("Victory! カードを1枚選んでください");
+
+    const rewardCandidates = this.shuffle([...REWARD_POOL]).slice(0, 3);
+    const { width, height } = this.scale;
+
+    rewardCandidates.forEach((card, index) => {
+      const x = width / 2 - 230 + index * 230;
+      const y = height / 2 + 50;
+
+      const panel = this.add.rectangle(x, y, 190, 240, Phaser.Display.Color.HexStringToColor(card.color).color, 0.95)
+        .setStrokeStyle(4, 0xffffff)
+        .setInteractive({ useHandCursor: true });
+      panel.setData("reward-ui", true);
+
+      const name = this.add.text(x, y - 65, card.name, { fontSize: "24px", color: "#ffffff", fontStyle: "bold" }).setOrigin(0.5);
+      const cost = this.add.text(x, y - 100, `Cost ${card.cost}`, { fontSize: "18px", color: "#fff3bf" }).setOrigin(0.5);
+      const effect = this.add
+        .text(x, y + 25, this.cardEffectLabel(card), { fontSize: "18px", color: "#f8f9fa", align: "center" })
+        .setOrigin(0.5);
+
+      [name, cost, effect].forEach((ui) => ui.setData("reward-ui", true));
+
+      panel.on("pointerup", () => {
+        runState.addCard(card);
+        this.clearRewardUI();
+        this.messageText.setText(`${card.name} を獲得！ デッキ枚数: ${runState.deck.length}`);
+        this.time.delayedCall(450, () => this.scene.start("map"));
+      });
+    });
   }
 
-  private makeButton(x: number, y: number, label: string, onClick: () => void): Phaser.GameObjects.Text {
-    const btn = this.add
-      .text(x, y, label, {
-        fontSize: "28px",
-        color: "#ffffff",
-        backgroundColor: "#374151",
-        padding: { left: 18, right: 18, top: 10, bottom: 10 },
-      })
+      const effect = this.add.text(x, y + 32, this.cardEffectLabel(card), { fontSize: "20px", color: "#f8f9fa" }).setOrigin(0.5);
+    this.children.list.filter((obj) => obj.getData("hand-ui")).forEach((obj) => obj.destroy());
+  }
+
+  private clearRewardUI(): void {
+    this.children.list.filter((obj) => obj.getData("reward-ui")).forEach((obj) => obj.destroy());
+  }
+
+  private cardEffectLabel(card: Card): string {
+    return [card.damage ? `DMG ${card.damage}` : null, card.block ? `BLK ${card.block}` : null, card.applyVulnerable ? "VULN" : null]
+      .filter(Boolean)
+      .join(" | ");
+    this.turnText.setText(`Turn ${this.turn}  Deck: ${runState.deck.length}`);
       .setOrigin(0.5)
       .setInteractive({ useHandCursor: true });
 

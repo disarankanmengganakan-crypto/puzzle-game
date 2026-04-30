@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { runState } from "../game/runState";
 
 export class TitleScene extends Phaser.Scene {
   constructor() {
@@ -50,6 +51,7 @@ export class TitleScene extends Phaser.Scene {
     const startGame = (): void => {
       if (started) return;
       started = true;
+      runState.reset();
       this.cameras.main.flash(280, 255, 255, 255);
       this.time.delayedCall(300, () => this.scene.start("map"));
     };
