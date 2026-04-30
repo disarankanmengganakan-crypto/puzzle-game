@@ -31,3 +31,34 @@
 - 立ち絵 / UI 枠 / 床タイル / ミニアイコンを独自生成
 - 画像生成時は「全年齢向け・露出控えめ・ファンタジーRPG UI」を明記
 - 生成アセットの商用可否とライセンスを必ず確認
+
+## PR が Conflict したときの解消手順
+
+GitHub で `This branch has conflicts that must be resolved` と出た場合は、
+`main` の最新を取り込んで競合を解消してから push してください。
+
+```bash
+git fetch origin
+git checkout <your-branch>
+git merge origin/main
+# 競合ファイルを編集（<<<<<<< ======= >>>>>>> を解消）
+git add README.md app.js index.html styles.css
+git commit -m "Resolve merge conflicts with main"
+git push origin <your-branch>
+```
+
+rebase 運用なら次でもOKです。
+
+```bash
+git fetch origin
+git checkout <your-branch>
+git rebase origin/main
+# 競合解消
+# git add <files>
+# git rebase --continue
+git push --force-with-lease origin <your-branch>
+```
+
+ポイント:
+- GitHub の `Resolve conflicts` ボタンでも解消できますが、4ファイル同時競合はローカル解消のほうが安全です。
+- 競合マーカーを残したまま commit しないこと（`rg "^<<<<<<<|^=======|^>>>>>>>"` で確認）。
