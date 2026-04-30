@@ -1,15 +1,16 @@
-:root { --bg:#060714; --panel:rgba(11,14,34,.82); --line:#4c62bf; --text:#e9f1ff; }
+:root { --bg:#060714; --panel:rgba(11,14,34,.86); --line:#4c62bf; --text:#e9f1ff; }
 * { box-sizing: border-box; }
 body { margin:0; font-family:"Yu Gothic",system-ui,sans-serif; color:var(--text); background: radial-gradient(circle at top, #1a275f, var(--bg)); }
 #scene { position:fixed; inset:0; z-index:0; }
-.hud { position:relative; z-index:2; width:min(470px,95vw); margin:12px; padding:14px; background:var(--panel); border:1px solid var(--line); border-radius:12px; backdrop-filter: blur(4px); }
+.hud { position:relative; z-index:2; width:min(560px,96vw); margin:12px; padding:14px; background:var(--panel); border:1px solid var(--line); border-radius:12px; backdrop-filter: blur(4px); }
 h1 { margin:0; font-size:1.7rem; }
-.subtitle { margin:4px 0 12px; font-size:.9rem; opacity:.88; }
-.status { line-height:1.65; margin-bottom:10px; }
+.subtitle { margin:4px 0 10px; font-size:.9rem; opacity:.9; }
+.status { line-height:1.55; margin-bottom:8px; }
 .controls { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; }
 button { border:1px solid #7690ff; background:linear-gradient(180deg,#2f44b8,#202f83); color:#f7f9ff; border-radius:8px; padding:8px 10px; font-weight:700; cursor:pointer; }
-.hint { margin:0 0 10px; font-size:.84rem; opacity:.92; }
+button:disabled { opacity:.5; cursor:not-allowed; }
 .log { min-height:44px; border:1px solid #34457b; border-radius:8px; padding:8px; background:rgba(8,11,25,.65); font-size:.92rem; margin-bottom:10px; }
-.asset-preview h3 { margin:0 0 6px; font-size:.95rem; }
-.asset-preview { border-top:1px solid rgba(120,140,255,.35); padding-top:8px; display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
-.asset-preview img { width:100%; border-radius:6px; border:1px solid rgba(188,202,255,.45); background:#111938; }
+.asset-gallery { border-top:1px solid rgba(120,140,255,.35); padding-top:10px; display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.asset-card { background:#0e1434; border:1px solid rgba(188,202,255,.45); border-radius:8px; padding:5px; }
+.asset-card img { width:100%; border-radius:5px; display:block; }
+.asset-card p { margin:5px 2px 2px; font-size:.76rem; opacity:.9; }
